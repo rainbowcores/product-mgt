@@ -42,7 +42,7 @@ class AuthController extends Controller
         $user = User::find(Auth::id());
         $accessToken= $user->createToken('authToken')->accessToken;
 
-        return response(['user' => $user, 'access_token' => $accessToken]);
+        return response()->json(['user' => $user, 'access_token' => $accessToken],200);
 
     }
     public function logout()
