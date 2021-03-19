@@ -18,6 +18,7 @@ class SupplierProductController extends BaseController
     {
         //
         $supplierProduct = SupplierProduct::with('supplier', 'product')->get();
+        
         return response(['supplierProduct' => $supplierProduct]);
     }
 
