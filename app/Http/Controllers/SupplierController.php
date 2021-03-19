@@ -15,6 +15,8 @@ class SupplierController extends BaseController
     public function index()
     {
         //
+        $suppliers = Supplier::all();
+        return response(['suppliers' => $suppliers]);
     }
 
     /**
@@ -36,6 +38,23 @@ class SupplierController extends BaseController
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'name' => 'required'
+        ]);
+        if ($request->has('id')){
+            $supplier=Supplier::find($request->id);
+            if ($supplier){
+                $supplier->update($validatedData);
+                return response([ 'supplier' => $supplier]);
+            }
+            else{
+                return response([ 'message' => 'Supplier Does Not Exist']);
+            }
+        }
+        else{
+            $supplier = Supplier::create($validatedData);
+        }
+        return response([ 'supplier' => $supplier]);
     }
 
     /**
@@ -44,9 +63,16 @@ class SupplierController extends BaseController
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function show(Supplier $supplier)
+    public function show($id)
     {
         //
+        $supplier = Supplier::find($id);
+        if ($supplier){
+            return response([ 'supplier' => $supplier]);
+        }
+        else{
+            return response([ 'message' => 'Supplier Does Not Exist']);
+        }
     }
 
     /**
@@ -78,8 +104,17 @@ class SupplierController extends BaseController
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Supplier $supplier)
+    public function destroy($id)
     {
         //
+        $supplier = Supplier::find($id);
+        if ($supplier){
+            $supplier->delete();
+
+            return response([ 'message' => 'Supplier Deleted']);
+        }
+        else{
+            return response([ 'message' => 'Supplier Does Not Exist']);
+        }
     }
 }

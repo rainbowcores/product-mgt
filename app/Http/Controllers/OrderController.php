@@ -15,6 +15,8 @@ class OrderController extends BaseController
     public function index()
     {
         //
+        $orders = Order::all();
+        return response(['orders' => $orders]);
     }
 
     /**
@@ -36,6 +38,23 @@ class OrderController extends BaseController
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'order_number' => 'required'
+        ]);
+        if ($request->has('id')){
+            $order=Order::find($request->id);
+            if ($order){
+                $order->update($validatedData);
+                return response([ 'order' => $order]);
+            }
+            else{
+                return response([ 'message' => 'Order Does Not Exist']);
+            }
+        }
+        else{
+            $order = Order::create($validatedData);
+        }
+        return response([ 'order' => $order]);
     }
 
     /**
@@ -44,9 +63,16 @@ class OrderController extends BaseController
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
         //
+        $order = Order::find($id);
+        if ($order){
+            return response([ 'order' => $order]);
+        }
+        else{
+            return response([ 'message' => 'Order Does Not Exist']);
+        }
     }
 
     /**
@@ -78,8 +104,17 @@ class OrderController extends BaseController
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
         //
+        $order = Order::find($id);
+        if ($order){
+            $order->delete();
+
+            return response([ 'message' => 'Order Deleted']);
+        }
+        else{
+            return response([ 'message' => 'Order Does Not Exist']);
+        }
     }
 }

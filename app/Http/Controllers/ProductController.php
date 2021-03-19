@@ -15,6 +15,8 @@ class ProductController extends BaseController
     public function index()
     {
         //
+        $products = Product::all();
+        return response(['products' => $products]);
     }
 
     /**
@@ -36,6 +38,26 @@ class ProductController extends BaseController
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'quantity' => 'required'
+        ]);
+        if ($request->has('id')){
+            $product=Product::find($request->id);
+            if ($product){
+                $product->update($validatedData);
+                return response([ 'product' => $product]);
+            }
+            else{
+                return response([ 'message' => 'Product Does Not Exist']);
+            }
+        }
+        else{
+            $product = Product::create($validatedData);
+        }
+        return response([ 'product' => $product]);
+
     }
 
     /**
@@ -44,9 +66,16 @@ class ProductController extends BaseController
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
         //
+        $product = Product::find($id);
+        if ($product){
+            return response([ 'product' => $product]);
+        }
+        else{
+            return response([ 'message' => 'Product Does Not Exist']);
+        }
     }
 
     /**
@@ -78,8 +107,18 @@ class ProductController extends BaseController
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         //
+        $product = Product::find($id);
+        if ($product){
+            $product->delete();
+
+            return response([ 'message' => 'Product Deleted']);
+        }
+        else{
+            return response([ 'message' => 'Product Does Not Exist']);
+        }
+
     }
 }
