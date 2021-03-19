@@ -1,5 +1,3 @@
 build:
   docker:
     web: ./docker/7.4/Dockerfile
-run:
-  web: start-container vendor/bin/heroku-php-apache2 public/
