@@ -121,6 +121,7 @@ class OrderDetailController extends BaseController
         $orderDetail = OrderDetail::find($id);
         if ($orderDetail){
             $orderDetail->delete();
+
             
 
             return response([ 'message' => 'OrderDetail Deleted']);
