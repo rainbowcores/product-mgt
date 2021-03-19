@@ -43,8 +43,8 @@ RUN apt-get update \
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php7.4
 
-RUN groupadd --force -g 1234 sail
-RUN useradd -ms /bin/bash --no-user-group -g 1234 -u 1337 sail
+RUN groupadd --force -g $WWWGROUP sail
+RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 
 COPY start-container /usr/local/bin/start-container
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
