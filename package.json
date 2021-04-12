@@ -17,7 +17,7 @@
         "@vue/cli-plugin-babel": "^4.1.2",
         "@vue/cli-plugin-eslint": "^4.1.2",
         "@vue/cli-service": "^4.1.2",
-        "axios": "^0.21",
+        "axios": "^0.21.1",
         "babel-eslint": "^10.0.3",
         "bootstrap": "^4.0.0",
         "eslint": "^5.16.0",
@@ -28,23 +28,24 @@
         "popper.js": "^1.12",
         "postcss": "^8.1.14",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
+        "sass": "^1.32.8",
         "sass-loader": "^8.0.0",
         "vue": "^2.5.17",
         "vue-cli-plugin-mdb": "^2.0.4",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.10",
-        "webpack": "^5.26.3"
+        "webpack": "^5.23.0"
     },
     "dependencies": {
         "bootstrap": "^4.6.0",
         "core-js": "^3.4.4",
         "mdbvue": "6.5.0",
-        "node-sass": "^4.14.1",
         "register-service-worker": "^1.7.2",
         "v-tooltip": "^2.1.2",
         "vue": "^2.6.12",
+        "vue-material": "^1.0.0-beta-7",
         "vue-router": "^3.5.1",
+        "vue-session": "^1.0.0",
         "vue2-google-maps": "^0.10.7"
     },
     "eslintConfig": {

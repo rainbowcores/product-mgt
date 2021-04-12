@@ -56,7 +56,7 @@ class ProductController extends BaseController
         else{
             $product = Product::create($validatedData);
         }
-        return response([ 'product' => $product]);
+        return response([ 'product' => $product, 'message' => 'Product Saved Successfully']);
 
     }
 
